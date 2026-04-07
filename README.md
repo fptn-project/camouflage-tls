@@ -1,7 +1,7 @@
 # Camouflage-TLS
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![C++17](https://img.shields.io/badge/C++-17-blue.svg)](https://en.cppreference.com/w/cpp/17)
+[![C++20](https://img.shields.io/badge/C++-17-blue.svg)](https://en.cppreference.com/w/cpp/20)
 
 C++ library for generating realistic browser TLS handshakes through captured and reproduced handshake patterns from major browsers.
 
@@ -72,6 +72,15 @@ int main() {
 # BUILDING 
 
 ```bash
-conan install . --output-folder=build --build=missing -s compiler.cppstd=20 --settings build_type=Release
+conan install . --output-folder=build --build=missing  -s compiler.cppstd=17 -o with_gui_client=True --settings build_type=Release
 
+cd build
+
+# Linux & macOS only
+cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug
+# Windows only
+cmake .. -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE="conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Debug
+
+cmake --build . --config Release
+ctest
 ```
