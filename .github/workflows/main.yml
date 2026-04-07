@@ -1,0 +1,102 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_ubuntu_x86_64:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Install dependencies
+        run: |
+          conan install . --output-folder=build --build=missing --settings build_type=Release -s compiler.cppstd=20
+      - name: Run cpplint
+        run: |
+          python3 cpplint.py --recursive --filter=-build/c++17,-whitespace/indent_namespace --counting=total ./src/ ./tests/
+      - name: Run cppcheck
+        run: |
+          cppcheck --error-exitcode=1 --enable=all --check-level=exhaustive --language=c++ --suppress=unusedFunction --inline-suppr --suppress=missingIncludeSystem --suppress=unknownMacro --suppress=unmatchedSuppression -I ./include/ -I ./src/ ./src/ ./tests/
+      - name: Configure CMake
+        run: |
+          cd build
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: |
+          cd build
+          cmake --build .
+      - name: Test
+        run: |
+          cd build
+          ctest -C Release
+
+  build_macos_arm64:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Install dependencies
+        run: |
+          conan install . --output-folder=build --build=missing --settings build_type=Release -s compiler.cppstd=20
+      - name: Run cpplint
+        run: |
+          python3 cpplint.py --recursive --filter=-build/c++17,-whitespace/indent_namespace --counting=total ./src/ ./tests/
+      - name: Run cppcheck
+        run: |
+          cppcheck --error-exitcode=1 --enable=all --check-level=exhaustive --language=c++ --suppress=unusedFunction --inline-suppr --suppress=missingIncludeSystem --suppress=unknownMacro --suppress=unmatchedSuppression -I ./include/ -I ./src/ ./src/ ./tests/
+      - name: Configure CMake
+        run: |
+          cd build
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: |
+          cd build
+          cmake --build .
+      - name: Test
+        run: |
+          cd build
+          ctest -C Release
+
+  build_windows_amd64:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Install dependencies
+        shell: powershell
+        run: |
+          conan install . --output-folder=build --build=missing --settings build_type=Release -s compiler.cppstd=20
+      - name: Run cpplint
+        run: |
+          python cpplint.py --recursive --filter=-build/c++17,-whitespace/indent_namespace --counting=total ./src/ ./tests/
+      - name: Run cppcheck
+        shell: powershell
+        run: |
+          cppcheck --error-exitcode=1 --enable=all --check-level=exhaustive --language=c++ --suppress=unusedFunction --inline-suppr --suppress=missingIncludeSystem --suppress=unknownMacro --suppress=unmatchedSuppression -I ./include/ -I ./src/ ./src/ ./tests/
+      - name: Configure CMake
+        shell: powershell
+        run: |
+          cd build
+          cmake .. -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE="conan_toolchain.cmake" -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        shell: powershell
+        run: |
+          cd build
+          cmake --build . --config Release
+      - name: Test
+        shell: powershell
+        run: |
+          cd build
+          ctest -C Release
