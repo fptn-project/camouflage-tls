@@ -31,10 +31,15 @@ include_directories(include/)
 
 add_library(camouflage-tls STATIC
   src/builder.cpp include/camouflage/tls/builder.hpp
+  # chrome
   src/browsers/google_chrome/google_chrome_builder.h src/browsers/google_chrome/google_chrome_builder.cpp
   src/browsers/google_chrome/versions/google_chrome_146_0_7680_178.cpp
+  # yandex
   src/browsers/yandex_browser/yandex_browser_builder.h src/browsers/yandex_browser/yandex_browser_builder.cpp
   src/browsers/yandex_browser/versions/yandex_browser_26_3_0_2182.cpp
+  # firefox
+  src/browsers/firefox/firefox_builder.h src/browsers/firefox/firefox_builder.cpp
+  src/browsers/firefox/versions/firefox_149_0.cpp
 )
 
 target_include_directories(camouflage-tls PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)

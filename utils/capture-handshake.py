@@ -578,6 +578,23 @@ class TLSHandshakeCapture:
                     subprocess.run(
                         ["taskkill", "/f", "/im", f"{proc}.exe"], capture_output=True
                     )
+                elif system == "Darwin":  # macOS
+                    applescript = '''
+                    tell application "Firefox"
+                        if it is running then
+                            quit
+                        end if
+                    end tell
+                    '''
+                    subprocess.run(["osascript", "-e", applescript],
+                                   capture_output=True, timeout=5)
+                    time.sleep(2)
+                    result = subprocess.run(["pgrep", "-f", "Firefox"],
+                                            capture_output=True)
+                    if result.returncode == 0:
+                        subprocess.run(["pkill", "-TERM", "-f", "Firefox"],
+                                       capture_output=True)
+                        time.sleep(1)
                 else:
                     subprocess.run(["pkill", "-f", proc], capture_output=True)
 
@@ -834,7 +851,7 @@ def parse_arguments() -> argparse.Namespace:
         "-w",
         "--wait",
         type=int,
-        default=15,
+        default=7,
         help="Wait time in seconds before closing browser (default: 3)",
     )
     parser.add_argument(

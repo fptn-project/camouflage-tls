@@ -12,14 +12,20 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 namespace camouflage::tls {
 
 Builder& Builder::GoogleChrome(google_chrome::Version version) {
-  current_builder_ = std::make_unique<GoogleChromeBrowserBuilder>(version);
-  current_version_ = version;
+  builder_ = std::make_unique<GoogleChromeBrowserBuilder>(version);
+  version_ = version;
   return *this;
 }
 
 Builder& Builder::YandexBrowser(yandex_browser::Version version) {
-  current_builder_ = std::make_unique<YandexBrowserBuilder>(version);
-  current_version_ = version;
+  builder_ = std::make_unique<YandexBrowserBuilder>(version);
+  version_ = version;
+  return *this;
+}
+
+Builder& Builder::Firefox(firefox::Version version) {
+  builder_ = std::make_unique<FirefoxBuilder>(version);
+  version_ = version;
   return *this;
 }
 
@@ -42,14 +48,14 @@ Builder& Builder::SetSessionId(const std::string& session_id_hex) {
 }
 
 HandshakeRecordOptional Builder::Generate() {
-  if (!current_builder_ || !sni_.has_value()) {
+  if (!builder_ || !sni_.has_value()) {
     return std::nullopt;
   }
   if (session_id_.has_value()) {
-    return current_builder_->GenerateHandshake(
+    return builder_->GenerateHandshake(
         sni_.value(), session_id_.value());
   }
-  return current_builder_->GenerateHandshake(sni_.value());
+  return builder_->GenerateHandshake(sni_.value());
 }
 
 }  // namespace camouflage::tls

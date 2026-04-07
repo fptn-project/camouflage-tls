@@ -10,12 +10,17 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include <optional>
 #include <variant>
 
+#include "browsers/firefox/firefox_builder.h"
+#include "browsers/firefox_browser.h"
 #include "browsers/google_chrome.h"
 #include "browsers/yandex_browser.h"
 #include "camouflage/tls/browsers/base_browser_builder.h"
 #include "camouflage/tls/types.hpp"
 
 namespace camouflage::tls {
+
+using Version = std::
+    variant<google_chrome::Version, yandex_browser::Version, firefox::Version>;
 
 class Builder {
  public:
@@ -26,6 +31,8 @@ class Builder {
 
   Builder& YandexBrowser(yandex_browser::Version version =
                              yandex_browser::Version::kV_26_3_0_2182);
+
+  Builder& Firefox(firefox::Version version);
 
   Builder& SetSNI(const SNI& sni);
 
@@ -39,9 +46,8 @@ class Builder {
   Builder() = default;
 
  private:
-  std::unique_ptr<BaseBrowserBuilder> current_builder_;
-  std::variant<google_chrome::Version, yandex_browser::Version>
-      current_version_;
+  std::unique_ptr<BaseBrowserBuilder> builder_;
+  Version version_;
   std::optional<SessionId> session_id_;
   std::optional<SNI> sni_;
 };
