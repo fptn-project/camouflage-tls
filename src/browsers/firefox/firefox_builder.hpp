@@ -5,17 +5,17 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 =============================================================================*/
 #pragma once
 
-#include "camouflage/tls/browsers/base_browser_builder.h"
-#include "camouflage/tls/browsers/google_chrome.h"
+#include "camouflage/tls/browsers/base_browser_builder.hpp"
+#include "camouflage/tls/browsers/firefox_browser.hpp"
 #include "camouflage/tls/types.hpp"
 
 namespace camouflage::tls {
 
-class GoogleChromeBrowserBuilder final : public BaseBrowserBuilder {
+class FirefoxBuilder final : public BaseBrowserBuilder {
  public:
-  explicit GoogleChromeBrowserBuilder(google_chrome::Version version);
+  explicit FirefoxBuilder(firefox::Version version);
 
-  ~GoogleChromeBrowserBuilder() override = default;
+  ~FirefoxBuilder() override = default;
 
   HandshakeRecordOptional GenerateHandshake(const SNI& sni) override;
 
@@ -23,7 +23,7 @@ class GoogleChromeBrowserBuilder final : public BaseBrowserBuilder {
       const SNI& sni, const SessionId& session_id) override;
 
  private:
-  const google_chrome::Version version_;
+  const firefox::Version version_;
   const HandshakeData* handshake_data_;
 };
 

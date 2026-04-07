@@ -4,11 +4,11 @@ Copyright (c) 2025 Stas Skokov
 Distributed under the MIT License (https://opensource.org/licenses/MIT)
 =============================================================================*/
 
-#include "yandex_browser_builder.h"
+#include "browsers/yandex_browser/yandex_browser_builder.hpp"
 
-#include "camouflage/tls/browsers/yandex_browser.h"
+#include "camouflage/tls/browsers/yandex_browser.hpp"
 #include "camouflage/tls/types.hpp"
-#include "camouflage/tls/utils.h"
+#include "camouflage/tls/utils.hpp"
 
 namespace camouflage::tls {
 extern const HandshakeData kBrowserYandex_26_3_0_2182;
@@ -40,6 +40,6 @@ HandshakeRecordOptional YandexBrowserBuilder::GenerateHandshake(
     return handshake;
   }
   return std::nullopt;
-};
+}
 
 }  // namespace camouflage::tls

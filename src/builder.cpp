@@ -6,8 +6,12 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 
 #include "camouflage/tls/builder.hpp"
 
-#include "browsers/google_chrome/google_chrome_builder.h"
-#include "browsers/yandex_browser/yandex_browser_builder.h"
+#include <memory>
+#include <string>
+#include <utility>
+
+#include "browsers/google_chrome/google_chrome_builder.hpp"
+#include "browsers/yandex_browser/yandex_browser_builder.hpp"
 
 namespace camouflage::tls {
 
@@ -52,8 +56,7 @@ HandshakeRecordOptional Builder::Generate() {
     return std::nullopt;
   }
   if (session_id_.has_value()) {
-    return builder_->GenerateHandshake(
-        sni_.value(), session_id_.value());
+    return builder_->GenerateHandshake(sni_.value(), session_id_.value());
   }
   return builder_->GenerateHandshake(sni_.value());
 }

@@ -4,10 +4,10 @@ Copyright (c) 2026 Stas Skokov
 Distributed under the MIT License (https://opensource.org/licenses/MIT)
 =============================================================================*/
 
-#include "google_chrome_builder.h"
+#include "browsers/google_chrome/google_chrome_builder.hpp"
 
 #include "camouflage/tls/types.hpp"
-#include "camouflage/tls/utils.h"
+#include "camouflage/tls/utils.hpp"
 
 namespace camouflage::tls {
 extern const HandshakeData kBrowserChrome_146_0_7680_178;
@@ -40,6 +40,6 @@ HandshakeRecordOptional GoogleChromeBrowserBuilder::GenerateHandshake(
     return handshake;
   }
   return std::nullopt;
-};
+}
 
 }  // namespace camouflage::tls

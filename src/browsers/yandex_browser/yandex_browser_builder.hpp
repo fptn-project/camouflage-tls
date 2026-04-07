@@ -5,9 +5,9 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 =============================================================================*/
 #pragma once
 
-#include "camouflage/tls/browsers/base_browser_builder.h"
-#include "camouflage/tls/browsers/google_chrome.h"
-#include "camouflage/tls/browsers/yandex_browser.h"
+#include "camouflage/tls/browsers/base_browser_builder.hpp"
+#include "camouflage/tls/browsers/google_chrome.hpp"
+#include "camouflage/tls/browsers/yandex_browser.hpp"
 #include "camouflage/tls/types.hpp"
 
 namespace camouflage::tls {

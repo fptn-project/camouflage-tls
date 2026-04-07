@@ -4,10 +4,10 @@ Copyright (c) 2026 Stas Skokov
 Distributed under the MIT License (https://opensource.org/licenses/MIT)
 =============================================================================*/
 
-#include "firefox_builder.h"
+#include "browsers/firefox/firefox_builder.hpp"
 
 #include "camouflage/tls/types.hpp"
-#include "camouflage/tls/utils.h"
+#include "camouflage/tls/utils.hpp"
 
 namespace camouflage::tls {
 extern const HandshakeData kBrowserFirefox_149_0;
@@ -38,6 +38,6 @@ HandshakeRecordOptional FirefoxBuilder::GenerateHandshake(
     return handshake;
   }
   return std::nullopt;
-};
+}
 
 }  // namespace camouflage::tls

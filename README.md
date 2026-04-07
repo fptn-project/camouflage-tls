@@ -67,3 +67,11 @@ int main() {
   return 0;
 }
 ```
+
+
+# BUILDING 
+
+```bash
+conan install . --output-folder=build --build=missing -s compiler.cppstd=20 --settings build_type=Release
+
+```
