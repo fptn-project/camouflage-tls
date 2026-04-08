@@ -10,10 +10,8 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include "camouflage/tls/types.hpp"
 #include "camouflage/tls/utils.hpp"
 
-namespace camouflage::tls {
-extern const HandshakeData kBrowserYandex_25_2_0_2118;
-extern const HandshakeData kBrowserYandex_26_3_0_2182;
-}  // namespace camouflage::tls
+#include "versions/yandex_browser_25_2_0_2118.hpp"
+#include "versions/yandex_browser_26_3_0_2182.hpp"
 
 namespace camouflage::tls {
 

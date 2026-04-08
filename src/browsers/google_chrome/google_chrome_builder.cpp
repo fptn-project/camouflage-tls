@@ -9,9 +9,7 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include "camouflage/tls/types.hpp"
 #include "camouflage/tls/utils.hpp"
 
-namespace camouflage::tls {
-extern const HandshakeData kBrowserChrome_146_0_7680_178;
-}
+#include "versions/google_chrome_146_0_7680_178.hpp"
 
 namespace camouflage::tls {
 

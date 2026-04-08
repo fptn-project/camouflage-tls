@@ -778,6 +778,8 @@ class TLSHandshakeCapture:
             f.write(f"// Browser: {self.browser} {browser_version}\n")
             f.write(f"// Platform: {platform.system()} {platform.release()}\n")
             f.write(f"// Total records: {len(self.handshakes)}\n\n")
+            f.write("\n")
+            f.write(f"#pragma once")
 
             f.write("#include <array>\n")
             f.write("#include <cstdint>\n")
@@ -785,11 +787,11 @@ class TLSHandshakeCapture:
             f.write("#include <unordered_map>\n")
             f.write("#include <vector>\n\n")
 
-            f.write('#include "src/browsers/handshake_data.h"\n\n')
+            f.write('#include "camouflage/tls/types.hpp"\n\n')
 
             f.write("namespace camouflage::tls {\n\n")
 
-            f.write(f"extern const HandshakeData {variable_name} = {{\n")
+            f.write(f"inline const HandshakeData {variable_name} = {{\n")
 
             sni_lengths = sorted(grouped.keys())
             for len_idx, sni_len in enumerate(sni_lengths):

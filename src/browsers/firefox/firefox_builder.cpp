@@ -9,9 +9,7 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include "camouflage/tls/types.hpp"
 #include "camouflage/tls/utils.hpp"
 
-namespace camouflage::tls {
-extern const HandshakeData kBrowserFirefox_149_0;
-}
+#include "versions/firefox_149_0.hpp"
 
 namespace camouflage::tls {
 

@@ -29,7 +29,7 @@ inline camouflage::tls::HandshakeRecordOptional FindRandomRecordBySni(
 
   std::random_device rd;
   std::mt19937 gen(rd());
-  std::uniform_int_distribution<> dis(0, records.size() - 1);
+  std::uniform_int_distribution<size_t> dis(0, records.size() - 1);
 
   HandshakeRecord new_record = records[dis(gen)];
   return new_record;
