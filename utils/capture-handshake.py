@@ -565,38 +565,65 @@ class TLSHandshakeCapture:
         """Close the launched browser"""
         system = platform.system()
 
-        browser_processes = {
-            "chrome": ["Google Chrome", "chrome", "google-chrome"],
-            "firefox": ["Firefox", "firefox"],
-            "yandex": ["Yandex", "yandex", "yandex-browser"],
-            "safari": ["Safari"],
+        browser_config = {
+            "chrome": {
+                "names": ["Google Chrome", "chrome", "google-chrome"],
+                "app_name": "Google Chrome",
+                "process": "chrome"
+            },
+            "firefox": {
+                "names": ["Firefox", "firefox"],
+                "app_name": "Firefox",
+                "process": "firefox"
+            },
+            "yandex": {
+                "names": ["Yandex", "yandex", "yandex-browser"],
+                "app_name": "Yandex",
+                "process": "yandex"
+            },
+            "safari": {
+                "names": ["Safari"],
+                "app_name": "Safari",
+                "process": "safari"
+            }
         }
 
-        if self.browser in browser_processes:
-            for proc in browser_processes[self.browser]:
-                if system == "Windows":
-                    subprocess.run(
-                        ["taskkill", "/f", "/im", f"{proc}.exe"], capture_output=True
-                    )
-                elif system == "Darwin":  # macOS
-                    applescript = '''
-                    tell application "Firefox"
-                        if it is running then
-                            quit
-                        end if
-                    end tell
-                    '''
-                    subprocess.run(["osascript", "-e", applescript],
-                                   capture_output=True, timeout=5)
-                    time.sleep(2)
-                    result = subprocess.run(["pgrep", "-f", "Firefox"],
-                                            capture_output=True)
-                    if result.returncode == 0:
-                        subprocess.run(["pkill", "-TERM", "-f", "Firefox"],
-                                       capture_output=True)
-                        time.sleep(1)
-                else:
-                    subprocess.run(["pkill", "-f", proc], capture_output=True)
+        if self.browser not in browser_config:
+            return
+
+        config = browser_config[self.browser]
+
+        if system == "Windows":
+            for proc in config["names"]:
+                subprocess.run(
+                    ["taskkill", "/f", "/im", f"{proc}.exe"],
+                    capture_output=True,
+                    timeout=3
+                )
+        elif system == "Darwin":  # macOS
+            # Use AppleScript to quit the browser gracefully
+            applescript = f'''
+            tell application "{config['app_name']}"
+                if it is running then
+                    quit
+                end if
+            end tell
+            '''
+            subprocess.run(["osascript", "-e", applescript],
+                        capture_output=True, timeout=5)
+            time.sleep(1)
+            
+            # Force kill if still running
+            result = subprocess.run(["pgrep", "-f", config['process']],
+                                    capture_output=True)
+            if result.returncode == 0:
+                subprocess.run(["pkill", "-TERM", "-f", config['process']],
+                            capture_output=True, timeout=3)
+                time.sleep(1)
+        else:  # Linux
+            for proc in config["names"]:
+                subprocess.run(["pkill", "-f", proc],
+                            capture_output=True, timeout=3)
 
     def _extract_handshake_data(
         self, pcap_file: str, sni: str

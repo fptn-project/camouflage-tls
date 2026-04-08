@@ -35,10 +35,11 @@ add_library(camouflage-tls STATIC
         src/browsers/google_chrome/google_chrome_builder.hpp src/browsers/google_chrome/google_chrome_builder.cpp
   src/browsers/google_chrome/versions/google_chrome_146_0_7680_178.cpp
   # yandex
-        src/browsers/yandex_browser/yandex_browser_builder.hpp src/browsers/yandex_browser/yandex_browser_builder.cpp
+  src/browsers/yandex_browser/yandex_browser_builder.hpp src/browsers/yandex_browser/yandex_browser_builder.cpp
   src/browsers/yandex_browser/versions/yandex_browser_26_3_0_2182.cpp
+  src/browsers/yandex_browser/versions/yandex_browser_25_2_0_2118.cpp
   # firefox
-        src/browsers/firefox/firefox_builder.hpp src/browsers/firefox/firefox_builder.cpp
+  src/browsers/firefox/firefox_builder.hpp src/browsers/firefox/firefox_builder.cpp
   src/browsers/firefox/versions/firefox_149_0.cpp
 )
 

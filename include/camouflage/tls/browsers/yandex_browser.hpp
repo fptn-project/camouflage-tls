@@ -12,6 +12,7 @@ namespace camouflage::tls::yandex_browser {
 
 enum class Version : uint32_t {
   kV_26_3_0_2182 = 1,
+  kV_25_2_0_2118 = 2,
 };
 
 }  // namespace camouflage::tls::yandex_browser
