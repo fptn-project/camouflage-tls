@@ -10,6 +10,7 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include <string>
 #include <utility>
 
+#include "browsers/firefox/firefox_builder.hpp"
 #include "browsers/google_chrome/google_chrome_builder.hpp"
 #include "browsers/yandex_browser/yandex_browser_builder.hpp"
 

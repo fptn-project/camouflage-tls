@@ -10,11 +10,10 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include <optional>
 #include <variant>
 
-#include "browsers/firefox/firefox_builder.hpp"
-#include "browsers/firefox_browser.hpp"
-#include "browsers/google_chrome.hpp"
-#include "browsers/yandex_browser.hpp"
 #include "camouflage/tls/browsers/base_browser_builder.hpp"
+#include "camouflage/tls/browsers/firefox_browser.hpp"
+#include "camouflage/tls/browsers/google_chrome.hpp"
+#include "camouflage/tls/browsers/yandex_browser.hpp"
 #include "camouflage/tls/types.hpp"
 
 namespace camouflage::tls {
