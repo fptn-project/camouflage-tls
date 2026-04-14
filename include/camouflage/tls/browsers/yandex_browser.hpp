@@ -11,8 +11,9 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 namespace camouflage::tls::yandex_browser {
 
 enum class Version : uint32_t {
-  kV_26_3_0_2182 = 1,
-  kV_25_2_0_2118 = 2,
+  kV_26_3_3_881 = 1,
+  kV_25_8_3_828 = 2,
+  kV_24_12_0_1772 = 3,
 };
 
 }  // namespace camouflage::tls::yandex_browser

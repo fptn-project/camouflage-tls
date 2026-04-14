@@ -8,9 +8,8 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 
 #include <memory>
 #include <string>
-#include <vector>
 
-#include "camouflage/tls/types.hpp"
+#include "camouflage/tls/utils.hpp"
 
 namespace camouflage::tls {
 

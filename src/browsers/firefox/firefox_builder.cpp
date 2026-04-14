@@ -8,34 +8,25 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 
 #include "camouflage/tls/types.hpp"
 #include "camouflage/tls/utils.hpp"
-
-#include "versions/firefox_149_0.hpp"
+#include "versions/firefox_149_0/firefox_149_0.hpp"
 
 namespace camouflage::tls {
 
 FirefoxBuilder::FirefoxBuilder(firefox::Version version)
     : version_(version), handshake_data_(nullptr) {
+  handshake_data_ = nullptr;
   if (version_ == firefox::Version::kV_149_0) {
     handshake_data_ = &kBrowserFirefox_149_0;
   }
 }
 
 HandshakeRecordOptional FirefoxBuilder::GenerateHandshake(const SNI& sni) {
-  auto handshake = FindRandomRecordBySni(sni, handshake_data_);
-  if (handshake.has_value() && handshake->GenerateNewRandom() &&
-      handshake->ReplaceSni(sni) && handshake->GenerateNewSessionId()) {
-    return handshake;
-  }
-  return std::nullopt;
+  return camouflage::tls::GenerateHandshake(handshake_data_, sni);
 }
 
 HandshakeRecordOptional FirefoxBuilder::GenerateHandshake(
     const SNI& sni, const SessionId& session_id) {
-  auto handshake = GenerateHandshake(sni);
-  if (handshake.has_value() && handshake->ReplaceSessionId(session_id)) {
-    return handshake;
-  }
-  return std::nullopt;
+  return camouflage::tls::GenerateHandshake(handshake_data_, sni, session_id);
 }
 
 }  // namespace camouflage::tls

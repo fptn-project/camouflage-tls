@@ -5,34 +5,24 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 =============================================================================*/
 #pragma once
 
-#include <random>
+#include <array>
+#include <optional>
 
 #include "camouflage/tls/types.hpp"
 
 namespace camouflage::tls {
 
-inline camouflage::tls::HandshakeRecordOptional FindRandomRecordBySni(
-    SNI sni, const camouflage::tls::HandshakeData* handshake_data) {
-  if (!handshake_data) {
-    return std::nullopt;
-  }
+using HandshakeRecordOptional = std::optional<tls::HandshakeRecord>;
 
-  const auto it = handshake_data->find(sni.size());
-  if (it == handshake_data->end()) {
-    return std::nullopt;
-  }
+using SNI = std::string;
+using SessionId = std::array<std::uint8_t, 32>;
+using Random = std::array<std::uint8_t, 32>;
 
-  const auto& records = it->second;
-  if (records.empty()) {
-    return std::nullopt;
-  }
+HandshakeRecordOptional GenerateHandshake(
+    const HandshakeData* data, const std::string& sni);
 
-  std::random_device rd;
-  std::mt19937 gen(rd());
-  std::uniform_int_distribution<size_t> dis(0, records.size() - 1);
-
-  HandshakeRecord new_record = records[dis(gen)];
-  return new_record;
-}
+HandshakeRecordOptional GenerateHandshake(const HandshakeData* data,
+    const std::string& sni,
+    const SessionId& session_id);
 
 }  // namespace camouflage::tls

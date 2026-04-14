@@ -6,119 +6,39 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 
 #pragma once
 
-#include <algorithm>
-#include <array>
+#include <cstddef>
 #include <cstdint>
-#include <optional>
-#include <random>
-#include <unordered_map>
-#include <vector>
 
 namespace camouflage::tls {
 
-using SNI = std::string;
-using SessionId = std::array<std::uint8_t, 32>;
-using RandomBytes = std::array<std::uint8_t, 32>;
-using Data = std::vector<uint8_t>;
+#define TLS_MAX_SNI_LEN 68
+#define TLS_SESSION_ID_SIZE 32
+#define TLS_RANDOM_SIZE 32
+#define TLS_MAX_PACKET_SIZE 2048
 
-inline std::optional<camouflage::tls::SessionId> ToSessionId(
-    const std::string& str) {
-  constexpr auto kSessionIdSize = camouflage::tls::SessionId{}.size();
-  if (str.size() != kSessionIdSize) {
-    return std::nullopt;
-  }
-  camouflage::tls::SessionId sid;
-  std::copy_n(str.begin(), kSessionIdSize, sid.begin());
-  return sid;
-}
+#define TLS_MAX_RECORDS 5
+#define TLS_MAX_ENTRIES 64
 
-struct HandshakeRecord {
-  SNI sni;
-  SessionId session_id;
-  RandomBytes random;
-  Data handshake_packet;
+// TLS record
+typedef struct {
+  char sni[TLS_MAX_SNI_LEN];
+  std::uint8_t session_id[TLS_SESSION_ID_SIZE];
+  std::uint8_t random[TLS_RANDOM_SIZE];
+  std::uint8_t handshake_packet[TLS_MAX_PACKET_SIZE];
+  std::size_t handshake_packet_size;
+} HandshakeRecord;
 
-  bool ReplaceSni(const SNI& new_sni) {
-    if (new_sni.size() != sni.size()) {
-      return false;
-    }
+// group records
+typedef struct {
+  std::size_t sni_length;
+  std::size_t record_count;
+  HandshakeRecord records[TLS_MAX_RECORDS];
+} HandshakeEntry;
 
-    auto it = std::ranges::search(handshake_packet, sni);
-    if (it.empty()) {
-      return false;
-    }
-
-    if (it.begin() + new_sni.size() > handshake_packet.end()) {
-      return false;
-    }
-
-    const auto result = std::ranges::copy(new_sni, it.begin());
-    if (result.in != new_sni.end()) {
-      return false;
-    }
-
-    this->sni = new_sni;
-    return true;
-  }
-
-  bool GenerateNewRandom() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, 255);
-
-    // replace random
-    RandomBytes new_random;
-    for (auto& byte : new_random) {
-      byte = static_cast<std::uint8_t>(dis(gen));
-    }
-    auto it = std::ranges::search(handshake_packet, random);
-    if (it.empty()) {
-      return false;
-    }
-    const auto result = std::ranges::copy(new_random, it.begin());
-    if (result.in != new_random.end()) {
-      return false;
-    }
-    this->random = new_random;
-    return true;
-  }
-
-  bool GenerateNewSessionId() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, 255);
-
-    // replace session_id
-    SessionId new_session_id;
-    for (auto& byte : new_session_id) {
-      byte = static_cast<std::uint8_t>(dis(gen));
-    }
-    auto it = std::ranges::search(handshake_packet, session_id);
-    if (it.empty()) {
-      return false;
-    }
-    return ReplaceSessionId(new_session_id);
-  }
-
-  bool ReplaceSessionId(const SessionId& new_session_id) {
-    auto it = std::ranges::search(handshake_packet, session_id);
-    if (it.empty()) {
-      return false;
-    }
-    if (it.begin() + new_session_id.size() > handshake_packet.end()) {
-      return false;
-    }
-    const auto result = std::ranges::copy(new_session_id, it.begin());
-    if (result.in != new_session_id.end()) {
-      return false;
-    }
-    this->session_id = new_session_id;
-    return true;
-  }
-};
-
-using HandshakeData = std::unordered_map<size_t, std::vector<HandshakeRecord>>;
-
-using HandshakeRecordOptional = std::optional<HandshakeRecord>;
+// group of handshake groups
+typedef struct {
+  std::size_t entry_count;
+  HandshakeEntry entries[TLS_MAX_ENTRIES];
+} HandshakeData;
 
 }  // namespace camouflage::tls

@@ -11,27 +11,32 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include <variant>
 
 #include "camouflage/tls/browsers/base_browser_builder.hpp"
-#include "camouflage/tls/browsers/firefox_browser.hpp"
+#include "camouflage/tls/browsers/firefox.hpp"
 #include "camouflage/tls/browsers/google_chrome.hpp"
+#include "camouflage/tls/browsers/safari.hpp"
 #include "camouflage/tls/browsers/yandex_browser.hpp"
 #include "camouflage/tls/types.hpp"
 
 namespace camouflage::tls {
 
-using Version = std::
-    variant<google_chrome::Version, yandex_browser::Version, firefox::Version>;
+using Version = std::variant<firefox::Version,
+    google_chrome::Version,
+    safari::Version,
+    yandex_browser::Version>;
 
 class Builder {
  public:
   static Builder Create() { return Builder(); }
 
+  Builder& Firefox(firefox::Version version = firefox::Version::kV_149_0);
+
   Builder& GoogleChrome(google_chrome::Version version =
-                            google_chrome::Version::kV_146_0_7680_178);
+                            google_chrome::Version::kV_147_0_7727_56);
 
-  Builder& YandexBrowser(yandex_browser::Version version =
-                             yandex_browser::Version::kV_26_3_0_2182);
+  Builder& Safari(safari::Version = safari::Version::kV_26_4);
 
-  Builder& Firefox(firefox::Version version);
+  Builder& YandexBrowser(
+      yandex_browser::Version version = yandex_browser::Version::kV_26_3_3_881);
 
   Builder& SetSNI(const SNI& sni);
 

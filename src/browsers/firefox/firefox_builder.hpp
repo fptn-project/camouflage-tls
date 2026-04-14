@@ -6,7 +6,7 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #pragma once
 
 #include "camouflage/tls/browsers/base_browser_builder.hpp"
-#include "camouflage/tls/browsers/firefox_browser.hpp"
+#include "camouflage/tls/browsers/firefox.hpp"
 #include "camouflage/tls/types.hpp"
 
 namespace camouflage::tls {

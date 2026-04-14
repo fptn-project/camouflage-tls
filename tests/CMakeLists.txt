@@ -24,6 +24,16 @@ target_link_libraries(GoogleChromeTests PRIVATE
 target_include_directories(GoogleChromeTests PRIVATE ${PROJECT_ROOT}/include)
 add_test(NAME GoogleChromeTests COMMAND GoogleChromeTests)
 
+# Safari
+add_executable(SafariTests tls/SafariTests.cpp)
+target_link_libraries(SafariTests PRIVATE
+        GTest::gtest
+        GTest::gtest_main
+        camouflage-tls
+)
+target_include_directories(SafariTests PRIVATE ${PROJECT_ROOT}/include)
+add_test(NAME SafariTests COMMAND SafariTests)
+
 # YandexBrowser
 add_executable(YandexBrowserTests tls/YandexBrowserTests.cpp)
 target_link_libraries(YandexBrowserTests PRIVATE

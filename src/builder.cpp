@@ -14,6 +14,17 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include "browsers/google_chrome/google_chrome_builder.hpp"
 #include "browsers/yandex_browser/yandex_browser_builder.hpp"
 
+namespace {
+std::optional<camouflage::tls::SessionId> ToSessionId(const std::string& str) {
+  if (str.size() != TLS_SESSION_ID_SIZE) {
+    return std::nullopt;
+  }
+  camouflage::tls::SessionId sid;
+  std::copy_n(str.begin(), TLS_SESSION_ID_SIZE, sid.begin());
+  return sid;
+}
+};  // namespace
+
 namespace camouflage::tls {
 
 Builder& Builder::GoogleChrome(google_chrome::Version version) {

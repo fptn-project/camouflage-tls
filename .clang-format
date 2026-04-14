@@ -25,7 +25,7 @@ IncludeCategories:
     Priority:        3
   - Regex:           '^<Qt[A-Z].*>'   # QT Modules (QtCore, QtGui и т.д.)
     Priority:        3
-  - Regex:          '^<protocol.pb.h>'
+  - Regex:          '^"versions/*"'
     Priority:        2
   - Regex:          '^<tuntap++.*>'
     Priority:        2
