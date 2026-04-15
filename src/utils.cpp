@@ -8,6 +8,7 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 
 #include <algorithm>
 #include <array>
+#include <cstring>
 #include <optional>
 #include <random>
 
@@ -18,7 +19,7 @@ void GenerateRandomBytes(std::uint8_t* bytes, std::size_t size) {
   static std::random_device rd;
   static std::mt19937 gen(rd());
   std::uniform_int_distribution<> dis(0, 255);
-  for (size_t i = 0; i < size; ++i) {
+  for (std::size_t i = 0; i < size; ++i) {
     bytes[i] = static_cast<std::uint8_t>(dis(gen));
   }
 }
@@ -41,7 +42,7 @@ std::optional<camouflage::tls::HandshakeRecord> GetRandomHandshakeRecord(
 
     static std::random_device rd;
     static std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, entry.record_count - 1);
+    std::uniform_int_distribution<std::size_t> dis(0, entry.record_count - 1);
     const std::size_t idx = dis(gen);
     return entry.records[idx];
   }

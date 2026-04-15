@@ -12,6 +12,7 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 
 #include "browsers/firefox/firefox_builder.hpp"
 #include "browsers/google_chrome/google_chrome_builder.hpp"
+#include "browsers/safari/safari_builder.hpp"
 #include "browsers/yandex_browser/yandex_browser_builder.hpp"
 
 namespace {
@@ -27,20 +28,26 @@ std::optional<camouflage::tls::SessionId> ToSessionId(const std::string& str) {
 
 namespace camouflage::tls {
 
+Builder& Builder::Firefox(firefox::Version version) {
+  builder_ = std::make_unique<FirefoxBuilder>(version);
+  version_ = version;
+  return *this;
+}
+
 Builder& Builder::GoogleChrome(google_chrome::Version version) {
   builder_ = std::make_unique<GoogleChromeBrowserBuilder>(version);
   version_ = version;
   return *this;
 }
 
-Builder& Builder::YandexBrowser(yandex_browser::Version version) {
-  builder_ = std::make_unique<YandexBrowserBuilder>(version);
+Builder& Builder::Safari(safari::Version version) {
+  builder_ = std::make_unique<SafariBuilder>(version);
   version_ = version;
   return *this;
 }
 
-Builder& Builder::Firefox(firefox::Version version) {
-  builder_ = std::make_unique<FirefoxBuilder>(version);
+Builder& Builder::YandexBrowser(yandex_browser::Version version) {
+  builder_ = std::make_unique<YandexBrowserBuilder>(version);
   version_ = version;
   return *this;
 }
