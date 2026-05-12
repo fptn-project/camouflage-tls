@@ -11,6 +11,7 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include "camouflage/tls/browsers/safari.hpp"
 #include "utils/test_utils.hpp"
 
+// NOLINTNEXTLINE(google-readability-avoid-underscore-in-googletest-name)
 TEST(FirefoxTests, Version_149_0) {
   camouflage::tls::SafariBuilder builder(
       camouflage::tls::safari::Version::kV_26_4);

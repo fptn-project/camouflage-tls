@@ -13,18 +13,21 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include "camouflage/tls/browsers/google_chrome.hpp"
 #include "utils/test_utils.hpp"
 
+// NOLINTNEXTLINE(google-readability-avoid-underscore-in-googletest-name)
 TEST(GoogleChromeTests, Version_145_0_7632_46) {
   camouflage::tls::GoogleChromeBrowserBuilder builder(
       camouflage::tls::google_chrome::Version::kV_145_0_7632_46);
   CheckBrowser(builder, camouflage::tls::kBrowserChrome_145_0_7632_46);
 }
 
+// NOLINTNEXTLINE(google-readability-avoid-underscore-in-googletest-name)
 TEST(GoogleChromeTests, Version_146_0_7680_178) {
   camouflage::tls::GoogleChromeBrowserBuilder builder(
       camouflage::tls::google_chrome::Version::kV_146_0_7680_178);
   CheckBrowser(builder, camouflage::tls::kBrowserChrome_146_0_7680_178);
 }
 
+// NOLINTNEXTLINE(google-readability-avoid-underscore-in-googletest-name)
 TEST(GoogleChromeTests, Version_147_0_7727_56) {
   camouflage::tls::GoogleChromeBrowserBuilder builder(
       camouflage::tls::google_chrome::Version::kV_147_0_7727_56);
