@@ -12,18 +12,21 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include "versions/yandex_24_12_0_1772/yandex_24_12_0_1772.hpp"
 #include "versions/yandex_25_8_3_828/yandex_25_8_3_828.hpp"
 #include "versions/yandex_26_3_3_881/yandex_26_3_3_881.hpp"
+#include "versions/yandex_26_4_3_897/yandex_26_4_3_897.hpp"
 
 namespace camouflage::tls {
 
 YandexBrowserBuilder::YandexBrowserBuilder(yandex_browser::Version version)
     : version_(version), handshake_data_(nullptr) {
   handshake_data_ = nullptr;
-  if (version_ == yandex_browser::Version::kV_26_3_3_881) {
-    handshake_data_ = &kBrowserYandex_26_3_3_881;
+  if (version == yandex_browser::Version::kV_24_12_0_1772) {
+    handshake_data_ = &kBrowserYandex_24_12_0_1772;
   } else if (version_ == yandex_browser::Version::kV_25_8_3_828) {
     handshake_data_ = &kBrowserYandex_25_8_3_828;
-  } else if (version == yandex_browser::Version::kV_24_12_0_1772) {
-    handshake_data_ = &kBrowserYandex_24_12_0_1772;
+  } else if (version_ == yandex_browser::Version::kV_26_3_3_881) {
+    handshake_data_ = &kBrowserYandex_26_3_3_881;
+  } else if (version_ == yandex_browser::Version::kV_26_4_3_897) {
+    handshake_data_ = &kBrowserYandex_26_4_3_897;
   }
 }
 

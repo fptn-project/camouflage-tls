@@ -10,6 +10,7 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include "camouflage/tls/types.hpp"
 #include "camouflage/tls/utils.hpp"
 #include "versions/safari_26_4/safari_26_4.hpp"
+#include "versions/safari_26_5/safari_26_5.hpp"
 
 namespace camouflage::tls {
 
@@ -18,6 +19,8 @@ SafariBuilder::SafariBuilder(safari::Version version)
   handshake_data_ = nullptr;
   if (version_ == safari::Version::kV_26_4) {
     handshake_data_ = &kBrowserSafari_26_4;
+  } else if (version_ == safari::Version::kV_26_5) {
+    handshake_data_ = &kBrowserSafari_26_5;
   }
 }
 

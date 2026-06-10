@@ -11,9 +11,11 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 namespace camouflage::tls::google_chrome {
 
 enum class Version : uint32_t {
-  kV_147_0_7727_56 = 1,
+  kV_145_0_7632_46 = 1,
   kV_146_0_7680_178 = 2,
-  kV_145_0_7632_46 = 3,
+  kV_147_0_7727_56 = 3,
+  kV_148_0_7778_216 = 4,
+  kV_149_0_7827_103 = 5,
 };
 
 }  // namespace camouflage::tls::google_chrome

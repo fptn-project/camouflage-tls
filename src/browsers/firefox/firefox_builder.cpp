@@ -9,6 +9,8 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include "camouflage/tls/types.hpp"
 #include "camouflage/tls/utils.hpp"
 #include "versions/firefox_149_0/firefox_149_0.hpp"
+#include "versions/firefox_150_0_3/firefox_150_0_3.hpp"
+#include "versions/firefox_151_0_3/firefox_151_0_3.hpp"
 
 namespace camouflage::tls {
 
@@ -17,6 +19,10 @@ FirefoxBuilder::FirefoxBuilder(firefox::Version version)
   handshake_data_ = nullptr;
   if (version_ == firefox::Version::kV_149_0) {
     handshake_data_ = &kBrowserFirefox_149_0;
+  } else if (version_ == firefox::Version::kV_150_0_3) {
+    handshake_data_ = &kBrowserFirefox_150_0_3;
+  } else if (version_ == firefox::Version::kV_151_0_3) {
+    handshake_data_ = &kBrowserFirefox_151_0_3;
   }
 }
 

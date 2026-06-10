@@ -6,6 +6,7 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 
 #include "camouflage/tls/builder.hpp"
 
+#include <algorithm>
 #include <memory>
 #include <string>
 #include <utility>

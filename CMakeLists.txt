@@ -28,9 +28,13 @@ add_library(camouflage-tls STATIC
   # firefox
   src/browsers/firefox/firefox_builder.hpp src/browsers/firefox/firefox_builder.cpp
   src/browsers/firefox/versions/firefox_149_0/firefox_149_0.hpp src/browsers/firefox/versions/firefox_149_0/firefox_149_0.cpp
+  src/browsers/firefox/versions/firefox_150_0_3/firefox_150_0_3.hpp src/browsers/firefox/versions/firefox_150_0_3/firefox_150_0_3.cpp
+  src/browsers/firefox/versions/firefox_151_0_3/firefox_151_0_3.hpp src/browsers/firefox/versions/firefox_151_0_3/firefox_151_0_3.cpp
 
   # google chrome
   src/browsers/google_chrome/google_chrome_builder.hpp src/browsers/google_chrome/google_chrome_builder.cpp
+  src/browsers/google_chrome/versions/chrome_149_0_7827_103/chrome_149_0_7827_103.hpp src/browsers/google_chrome/versions/chrome_149_0_7827_103/chrome_149_0_7827_103.cpp
+  src/browsers/google_chrome/versions/chrome_148_0_7778_216/chrome_148_0_7778_216.hpp src/browsers/google_chrome/versions/chrome_148_0_7778_216/chrome_148_0_7778_216.cpp
   src/browsers/google_chrome/versions/chrome_147_0_7727_56/chrome_147_0_7727_56.hpp src/browsers/google_chrome/versions/chrome_147_0_7727_56/chrome_147_0_7727_56.cpp
   src/browsers/google_chrome/versions/chrome_146_0_7680_178/chrome_146_0_7680_178.hpp src/browsers/google_chrome/versions/chrome_146_0_7680_178/chrome_146_0_7680_178.cpp
   src/browsers/google_chrome/versions/chrome_145_0_7632_46/chrome_145_0_7632_46.hpp src/browsers/google_chrome/versions/chrome_145_0_7632_46/chrome_145_0_7632_46.cpp
@@ -38,12 +42,14 @@ add_library(camouflage-tls STATIC
   # safari
   src/browsers/safari/safari_builder.hpp src/browsers/safari/safari_builder.cpp
   src/browsers/safari/versions/safari_26_4/safari_26_4.hpp src/browsers/safari/versions/safari_26_4/safari_26_4.cpp
+  src/browsers/safari/versions/safari_26_5/safari_26_5.hpp src/browsers/safari/versions/safari_26_5/safari_26_5.cpp
 
   # yandex
   src/browsers/yandex_browser/yandex_browser_builder.hpp src/browsers/yandex_browser/yandex_browser_builder.cpp
   src/browsers/yandex_browser/versions/yandex_24_12_0_1772/yandex_24_12_0_1772.hpp src/browsers/yandex_browser/versions/yandex_24_12_0_1772/yandex_24_12_0_1772.cpp
   src/browsers/yandex_browser/versions/yandex_25_8_3_828/yandex_25_8_3_828.hpp src/browsers/yandex_browser/versions/yandex_25_8_3_828/yandex_25_8_3_828.cpp
   src/browsers/yandex_browser/versions/yandex_26_3_3_881/yandex_26_3_3_881.hpp src/browsers/yandex_browser/versions/yandex_26_3_3_881/yandex_26_3_3_881.cpp
+  src/browsers/yandex_browser/versions/yandex_26_4_3_897/yandex_26_4_3_897.hpp src/browsers/yandex_browser/versions/yandex_26_4_3_897/yandex_26_4_3_897.cpp
 )
 
 target_include_directories(camouflage-tls PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)

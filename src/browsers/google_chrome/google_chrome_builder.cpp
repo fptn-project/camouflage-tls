@@ -11,18 +11,24 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 #include "versions/chrome_145_0_7632_46/chrome_145_0_7632_46.hpp"
 #include "versions/chrome_146_0_7680_178/chrome_146_0_7680_178.hpp"
 #include "versions/chrome_147_0_7727_56/chrome_147_0_7727_56.hpp"
+#include "versions/chrome_148_0_7778_216/chrome_148_0_7778_216.hpp"
+#include "versions/chrome_149_0_7827_103/chrome_149_0_7827_103.hpp"
 
 namespace camouflage::tls {
 
 GoogleChromeBrowserBuilder::GoogleChromeBrowserBuilder(
     google_chrome::Version version)
     : version_(version), handshake_data_(nullptr) {
-  if (version_ == google_chrome::Version::kV_147_0_7727_56) {
-    handshake_data_ = &kBrowserChrome_147_0_7727_56;
+  if (version == google_chrome::Version::kV_145_0_7632_46) {
+    handshake_data_ = &kBrowserChrome_145_0_7632_46;
   } else if (version == google_chrome::Version::kV_146_0_7680_178) {
     handshake_data_ = &kBrowserChrome_146_0_7680_178;
-  } else if (version == google_chrome::Version::kV_145_0_7632_46) {
-    handshake_data_ = &kBrowserChrome_145_0_7632_46;
+  } else if (version_ == google_chrome::Version::kV_147_0_7727_56) {
+    handshake_data_ = &kBrowserChrome_147_0_7727_56;
+  } else if (version_ == google_chrome::Version::kV_148_0_7778_216) {
+    handshake_data_ = &kBrowserChrome_148_0_7778_216;
+  }else if (version_ == google_chrome::Version::kV_149_0_7827_103) {
+    handshake_data_ = &kBrowserChrome_149_0_7827_103;
   }
 }
 

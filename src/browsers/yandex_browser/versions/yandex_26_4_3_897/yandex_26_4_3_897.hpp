@@ -6,14 +6,10 @@ Distributed under the MIT License (https://opensource.org/licenses/MIT)
 
 #pragma once
 
-#include <cstdint>
+#include "camouflage/tls/types.hpp"
 
-namespace camouflage::tls::firefox {
+namespace camouflage::tls {
 
-enum class Version : uint32_t {
-  kV_149_0 = 1,
-  kV_150_0_3 = 2,
-  kV_151_0_3 = 3,
-};
+extern const HandshakeData kBrowserYandex_26_4_3_897;
 
-}  // namespace camouflage::tls::firefox
+}  // namespace camouflage::tls

@@ -23,11 +23,17 @@ The library supports generating ClientHello messages with SNI lengths between `4
 
 | Browser                                                                                                                                                   | Version        |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| <img src="https://static.wikia.nocookie.net/logopedia/images/0/0d/Firefox_logo_2019.svg/revision/latest?cb=20191026110452" height="15"/> Firefox          | 151.0.3        |
+| <img src="https://static.wikia.nocookie.net/logopedia/images/0/0d/Firefox_logo_2019.svg/revision/latest?cb=20191026110452" height="15"/> Firefox          | 150.0.3        |
 | <img src="https://static.wikia.nocookie.net/logopedia/images/0/0d/Firefox_logo_2019.svg/revision/latest?cb=20191026110452" height="15"/> Firefox          | 149.0          |
+| <img src="https://static.wikia.nocookie.net/logopedia/images/b/b4/Google_Chrome_2022.svg/revision/latest?cb=20220405034021" height="15"/> Google Chrome   | 149.0.7827.103 |
+| <img src="https://static.wikia.nocookie.net/logopedia/images/b/b4/Google_Chrome_2022.svg/revision/latest?cb=20220405034021" height="15"/> Google Chrome   | 148.0.7778.216 |
 | <img src="https://static.wikia.nocookie.net/logopedia/images/b/b4/Google_Chrome_2022.svg/revision/latest?cb=20220405034021" height="15"/> Google Chrome   | 147.0.7727.56  |
 | <img src="https://static.wikia.nocookie.net/logopedia/images/b/b4/Google_Chrome_2022.svg/revision/latest?cb=20220405034021" height="15"/> Google Chrome   | 146.0.7680.178 |
 | <img src="https://static.wikia.nocookie.net/logopedia/images/b/b4/Google_Chrome_2022.svg/revision/latest?cb=20220405034021" height="15"/> Google Chrome   | 145.0.7632.46  |
+| <img src="https://static.wikia.nocookie.net/logopedia/images/7/73/Safari_2025.png/revision/latest?cb=20251104204856" height="15"/> Safari                 | 26.5           |
 | <img src="https://static.wikia.nocookie.net/logopedia/images/7/73/Safari_2025.png/revision/latest?cb=20251104204856" height="15"/> Safari                 | 26.4           |
+| <img src="https://static.wikia.nocookie.net/logopedia/images/8/89/Yandex_Browser_2024.svg/revision/latest?cb=20240723101636" height="15"/> Yandex Browser | 26.4.3.897     |
 | <img src="https://static.wikia.nocookie.net/logopedia/images/8/89/Yandex_Browser_2024.svg/revision/latest?cb=20240723101636" height="15"/> Yandex Browser | 26.3.3.881     |
 | <img src="https://static.wikia.nocookie.net/logopedia/images/8/89/Yandex_Browser_2024.svg/revision/latest?cb=20240723101636" height="15"/> Yandex Browser | 25.8.3.828     |
 | <img src="https://static.wikia.nocookie.net/logopedia/images/8/89/Yandex_Browser_2024.svg/revision/latest?cb=20240723101636" height="15"/> Yandex Browser | 24.12.0.1772   |
@@ -38,7 +44,9 @@ The library supports generating ClientHello messages with SNI lengths between `4
 
 #include <iostream>
 
+
 #include "camouflage/tls/builder.hpp"
+
 
 int main() {
   const auto h1 = camouflage::tls::Builder::Create()

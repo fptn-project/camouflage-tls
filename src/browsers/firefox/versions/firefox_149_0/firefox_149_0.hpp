@@ -1,6 +1,8 @@
-// Auto-generated TLS Handshake Data
-// Generated: 2026-04-14T19:47:48.260432
-// Browser: firefox 149.0
+/*=============================================================================
+Copyright (c) 2026 Stas Skokov
+
+Distributed under the MIT License (https://opensource.org/licenses/MIT)
+=============================================================================*/
 
 #pragma once
 
